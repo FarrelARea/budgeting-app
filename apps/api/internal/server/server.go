@@ -7,11 +7,12 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	chimiddleware "github.com/go-chi/chi/v5/middleware"
 	"github.com/jackc/pgx/v5/pgxpool"
 
 	"github.com/farrelarea/budgeting-app/apps/api/internal/config"
 	"github.com/farrelarea/budgeting-app/apps/api/internal/handler"
+	"github.com/farrelarea/budgeting-app/apps/api/internal/middleware"
 )
 
 // Server wires HTTP routing with dependencies.
@@ -34,15 +35,21 @@ func New(ctx context.Context, cfg config.Config) (*Server, error) {
 
 	s := &Server{cfg: cfg, pool: pool}
 	s.router = chi.NewRouter()
-	s.router.Use(middleware.RequestID)
-	s.router.Use(middleware.RealIP)
-	s.router.Use(middleware.Logger)
-	s.router.Use(middleware.Recoverer)
-	s.router.Use(middleware.Timeout(30 * time.Second))
+	s.router.Use(chimiddleware.RequestID)
+	s.router.Use(chimiddleware.RealIP)
+	s.router.Use(chimiddleware.Logger)
+	s.router.Use(chimiddleware.Recoverer)
+	s.router.Use(chimiddleware.Timeout(30 * time.Second))
 
 	s.router.Get("/healthz", handler.Health(cfg, pool))
 	s.router.Route("/api/v1", func(r chi.Router) {
-		r.Get("/accounts", handler.ListAccounts(pool))
+		r.Route("/auth", func(r chi.Router) {
+			r.Post("/login", handler.Login(pool))
+		})
+		r.Group(func(r chi.Router) {
+			r.Use(middleware.RequireAuth)
+			r.Get("/accounts", handler.ListAccounts(pool))
+		})
 	})
 
 	return s, nil

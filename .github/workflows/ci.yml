@@ -37,7 +37,9 @@ jobs:
         with:
           go-version: "1.23"
       - name: Apply migrations
-        run: psql postgresql://postgres:postgres@localhost:5432/budgeting -f apps/api/migrations/000001_init.up.sql
+        run: |
+          psql postgresql://postgres:postgres@localhost:5432/budgeting -f apps/api/migrations/000001_init.up.sql
+          psql postgresql://postgres:postgres@localhost:5432/budgeting -f apps/api/migrations/000002_users.up.sql
         env:
           PGPASSWORD: postgres
       - working-directory: apps/api

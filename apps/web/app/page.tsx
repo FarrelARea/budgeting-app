@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button, Card, CardContent, CardHeader, CardTitle } from "@budgeting/ui";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
@@ -31,6 +32,9 @@ export default async function HomePage() {
           <div className="flex gap-2">
             <Button>Get started</Button>
             <Button variant="secondary">View accounts</Button>
+            <Link href="/login">
+              <Button variant="ghost">Login</Button>
+            </Link>
           </div>
         </CardContent>
       </Card>
