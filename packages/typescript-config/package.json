@@ -1,0 +1,12 @@
+{
+  "name": "@budgeting/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": ["base.json", "nextjs.json", "react-library.json", "node.json"],
+  "exports": {
+    "./base.json": "./base.json",
+    "./nextjs.json": "./nextjs.json",
+    "./react-library.json": "./react-library.json",
+    "./node.json": "./node.json"
+  }
+}

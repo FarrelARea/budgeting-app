@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.turbo/
+coverage/
+
+# Go
+apps/api/bin/
+apps/api/tmp/
+*.exe
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Turborepo
+.turbo/
+
+# TypeScript
+*.tsbuildinfo

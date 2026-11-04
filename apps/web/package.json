@@ -1,0 +1,32 @@
+{
+  "name": "@budgeting/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --port 3000",
+    "lint": "eslint . --max-warnings=0",
+    "start": "next start",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "echo \"no tests\""
+  },
+  "dependencies": {
+    "@budgeting/types": "workspace:*",
+    "@budgeting/ui": "workspace:*",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@budgeting/eslint-config": "workspace:*",
+    "@budgeting/typescript-config": "workspace:*",
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^9.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.6.0"
+  }
+}
